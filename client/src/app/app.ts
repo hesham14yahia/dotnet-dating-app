@@ -1,32 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Nav } from '../layout/nav/nav';
-import { AccountService } from '../core/services/account-service';
 import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  imports: [Nav, RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+    selector: 'app-root',
+    imports: [Nav, RouterOutlet],
+    templateUrl: './app.html',
+    styleUrl: './app.css'
 })
 
-export class App implements OnInit {
-  // private http = inject(HttpClient);
-  private accountService = inject(AccountService);
-  protected router = inject(Router);
-  protected title = "Dating App";
-  protected url = "https://localhost:5001";
-  protected members = signal<any>([]);
-
-  ngOnInit(): void {
-    this.setCurrentUser();
-  }
-
-  setCurrentUser() {
-    const userString = localStorage.getItem('user');
-    if (!userString) return;
-    const user = JSON.parse(userString);
-    this.accountService.currentUser.set(user);
-  }
+export class App {
+    protected router = inject(Router);
 }
