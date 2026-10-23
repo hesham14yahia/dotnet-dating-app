@@ -13,18 +13,18 @@ import { ToastService } from '../../core/services/toast-service';
 export class Nav {
   protected accountService = inject(AccountService)
   private router = inject(Router)
-  private toast = inject(ToastService)
+  private toastService = inject(ToastService)
   protected creds: any = {}
 
   login() {
     this.accountService.login(this.creds).subscribe({
       next: result => {
-        this.toast.success('Logged IN');
+        this.toastService.show('Logged IN', 'success');
         this.router.navigateByUrl('/members');
         this.creds = {}
       },
       error: error => {
-        this.toast.error(error.error);
+        this.toastService.show(error.error, 'error');
       }
     });
   }
